@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/board")
 class PostController @Autowired constructor(val postService: PostService) {
     @PostMapping
-    fun writePost(@RequestBody writePostRequest: WritePostRequest): ResponseEntity<Any>{
-        val post = postService.write(writePostRequest)
-        return ResponseEntity.ok().body(post)
+    fun writePost(@RequestBody writePostRequest: WritePostRequest): ResponseEntity<Void>{
+        postService.write(writePostRequest)
+        return ResponseEntity.ok().build()
     }
 }

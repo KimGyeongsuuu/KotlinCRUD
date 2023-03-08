@@ -1,5 +1,6 @@
 package com.example.kotlincrud.service
 
+import com.example.kotlincrud.entity.Post
 import com.example.kotlincrud.presentation.dto.request.WritePostRequest
 import com.example.kotlincrud.repository.PostRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,5 +12,6 @@ class PostService @Autowired constructor(
     val postRepository: PostRepository
 ){
     @Transactional
-    fun write(writePostRequest: WritePostRequest):Long? = postRepository.save(writePostRequest.toEntity()).id
+    fun write(writePostRequest: WritePostRequest): Post = postRepository.save(writePostRequest.toEntity())
+
 }
