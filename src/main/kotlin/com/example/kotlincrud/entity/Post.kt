@@ -14,5 +14,9 @@ class Post(
     var content: String,
     var writer: String
     ){
+    fun update(title:String, content:String){
+        this.title = title
+        this.content = content
+    }
 
 }

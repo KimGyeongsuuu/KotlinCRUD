@@ -11,14 +11,22 @@ import javax.transaction.Transactional
 @Service
 class PostService @Autowired constructor(
     val postRepository: PostRepository
-){
+) {
     @Transactional
-    fun write(writePostRequest: WritePostRequest): Post = postRepository.save(writePostRequest.toEntity())
+    fun write(writePostRequest: WritePostRequest) = postRepository.save(writePostRequest.toEntity())
 
     @Transactional
     fun view(): List<Post> = postRepository.findAll()
 
     @Transactional
-    fun viewById(postId:Long): Post = postRepository.findByIdOrNull(postId) ?: throw IllegalArgumentException("게시글을 찾을 수 없습니다.")
+    fun viewById(postId: Long): Post =
+        postRepository.findByIdOrNull(postId) ?: throw IllegalArgumentException("게시글을 찾을 수 없습니다.")
+
+    @Transactional
+    fun update(postId: Long, writePostRequest: WritePostRequest) {
+        val post = postRepository.findByIdOrNull(postId) ?: throw IllegalArgumentException("게시글을 찾을 수 없습니다.")
+        post.update(writePostRequest.title,writePostRequest.content)
+        postRepository.save(post)
+    }
 
 }
