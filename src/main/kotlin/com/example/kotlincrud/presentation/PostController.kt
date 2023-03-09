@@ -5,6 +5,7 @@ import com.example.kotlincrud.presentation.dto.request.WritePostRequest
 import com.example.kotlincrud.service.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -34,6 +35,12 @@ class PostController @Autowired constructor(val postService: PostService) {
     @PatchMapping("/{id}")
     fun updatePost(@PathVariable id:Long,@RequestBody writePostRequest: WritePostRequest): ResponseEntity<Void>{
         postService.update(id,writePostRequest)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("/{id}")
+    fun deletePost(@PathVariable id:Long) : ResponseEntity<Void>{
+        postService.delete(id)
+        return ResponseEntity.noContent().build()
     }
 }
