@@ -14,4 +14,7 @@ class PostService @Autowired constructor(
     @Transactional
     fun write(writePostRequest: WritePostRequest): Post = postRepository.save(writePostRequest.toEntity())
 
+    @Transactional
+    fun view(): List<Post> = postRepository.findAll()
+
 }

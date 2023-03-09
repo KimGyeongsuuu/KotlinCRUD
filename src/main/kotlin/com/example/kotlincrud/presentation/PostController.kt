@@ -1,9 +1,11 @@
 package com.example.kotlincrud.presentation
 
+import com.example.kotlincrud.entity.Post
 import com.example.kotlincrud.presentation.dto.request.WritePostRequest
 import com.example.kotlincrud.service.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,5 +18,11 @@ class PostController @Autowired constructor(val postService: PostService) {
     fun writePost(@RequestBody writePostRequest: WritePostRequest): ResponseEntity<Void>{
         postService.write(writePostRequest)
         return ResponseEntity.ok().build()
+    }
+
+    @GetMapping
+    fun viewPost():ResponseEntity<List<Post>>{
+        val posts = postService.view()
+        return ResponseEntity.ok(posts)
     }
 }
